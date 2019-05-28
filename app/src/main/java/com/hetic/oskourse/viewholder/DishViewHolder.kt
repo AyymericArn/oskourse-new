@@ -15,16 +15,19 @@ class DishViewHolder (itemView: View): FastAdapter.ViewHolder<DishItem>(itemView
     val nameTextView:TextView
     val areaTextView:TextView
     val imageView:ImageView
+    var id:Int
 
     init {
         nameTextView = itemView.findViewById(R.id.nameTextView)
         areaTextView = itemView.findViewById(R.id.areaTextView)
         imageView = itemView.findViewById(R.id.imageView)
+        id = 0
     }
 
     override fun bindView(item: DishItem, payloads: MutableList<Any>) {
         nameTextView.text = item.dish.strMeal
         areaTextView.text = item.dish.strArea
+        id = item.dish.idMeal
 
         if (item.dish.strMeal.isNotEmpty()) {
             Picasso.get().load(item.dish.strMealThumb).into(imageView)
@@ -36,6 +39,7 @@ class DishViewHolder (itemView: View): FastAdapter.ViewHolder<DishItem>(itemView
     override fun unbindView(item: DishItem) {
         nameTextView.text = ""
         areaTextView.text = ""
+        id = 0
         imageView.setImageBitmap(null)
     }
 }

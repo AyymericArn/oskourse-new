@@ -14,11 +14,15 @@ interface MealApi {
 
     @GET("search.php")
     fun searchDish(@Query("s") s: String): Call<DishWrapper>
+
+    @GET("lookup.php")
+    fun getDishById(@Query("i") i: Int): Call<DishWrapper>
 }
 
 class Dish(
     val strMeal: String,
     val strArea: String,
+    val idMeal: Int,
     val strMealThumb: String
 )
 

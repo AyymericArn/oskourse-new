@@ -1,6 +1,7 @@
 package com.hetic.oskourse.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.hetic.oskourse.HomeActivity
 
 import com.hetic.oskourse.R
 import com.hetic.oskourse.services.DishWrapper
@@ -50,7 +52,14 @@ class MainFragment : Fragment(), TextWatcher {
 
         fastAdapter.withOnClickListener { view, adapter, item, position ->
 
+            val bundle = Bundle()
+            bundle.putInt("id", item.dish.idMeal)
+//            Toast.makeText(thisContext, "${item.dish.idMeal}", Toast.LENGTH_SHORT).show()
+
             val module = MealInfosFragment()
+            module.arguments = bundle
+
+            // replace fragment with the meal infos when an item in the link is clicked
 
             getActivity()?.getSupportFragmentManager()?.beginTransaction()
                 ?.replace(R.id.fragmentContainer, module, "findThisFragment")
@@ -63,21 +72,6 @@ class MainFragment : Fragment(), TextWatcher {
         recyclerView.adapter = fastAdapter
 
         val repository = MealRepository()
-
-        // search bar handler
-
-//        searchBar.addTextChangedListener(object: TextWatcher {
-//            override fun afterTextChanged(str: Editable?) {
-//                val content = str?.text.toString()
-//                str?.error = if (content.length >= 6) null else "Minimum length = 6"
-//            }
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-//
-//            override fun onTextChanged(s: Editable?) {
-//                Toast.makeText(this@HomeActivity, s, Toast.LENGTH_SHORT).show()
-//            }
-//        })
 
         searchBar.addTextChangedListener(this)
 
@@ -101,6 +95,8 @@ class MainFragment : Fragment(), TextWatcher {
                                     val item = DishItem(res)
 
                                     itemAdapter.add(item)
+                                } else {
+                                    itemAdapter.removeRange(0, itemAdapter.adapterItemCount)
                                 }
 //                        Toast.makeText(this@HomeActivity, "success", Toast.LENGTH_SHORT).show()
                             }
