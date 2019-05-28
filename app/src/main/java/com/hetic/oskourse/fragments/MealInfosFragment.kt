@@ -9,6 +9,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 
 import com.hetic.oskourse.R
+import com.hetic.oskourse.services.DishWrapper
+import com.hetic.oskourse.services.MealRepository
+import com.hetic.oskourse.viewholder.DishItem
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_meal_infos.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MealInfosFragment : Fragment() {
 
@@ -21,9 +29,33 @@ class MealInfosFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val string = arguments?.get("id").toString()
+        val id = arguments?.get("id").toString().toInt()
 
-        Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
+        val repository = MealRepository()
+
+        repository.api.getDishById(id)
+            .enqueue(object : Callback<DishWrapper> {
+                override fun onResponse(call: Call<DishWrapper>, response: Response<DishWrapper>) {
+                    val dishWrapper = response.body()
+                    if (dishWrapper != null) {
+
+                        val res = dishWrapper.meals[0]
+
+                        mealTitleTextView.text = res.strMeal
+                        mealOriginTextView.text = res.strArea
+                        mealDescriptionTextView.text = res.strInstructions
+                        mealCategoryTextView.text = res.strCategory
+
+                        Picasso.get().load(res.strMealThumb).into(imageView)
+
+                    }
+                }
+
+                override fun onFailure(call: Call<DishWrapper>, t: Throwable) {
+                    t.printStackTrace()
+                    Toast.makeText(context, "failure", Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 
 }

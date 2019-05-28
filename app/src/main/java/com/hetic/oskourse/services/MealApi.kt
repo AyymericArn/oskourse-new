@@ -23,7 +23,13 @@ class Dish(
     val strMeal: String,
     val strArea: String,
     val idMeal: Int,
-    val strMealThumb: String
+    val strMealThumb: String,
+
+    // for mealinfosfragment
+    val strInstructions: String,
+    val strCategory: String
+
+    // ingredients
 )
 
 class DishWrapper(val meals: List<Dish>)
