@@ -49,8 +49,14 @@ class MainFragment : Fragment(), TextWatcher {
         val fastAdapter = FastAdapter.with<DishItem, ItemAdapter<IItem<*, *>>>(itemAdapter)
 
         fastAdapter.withOnClickListener { view, adapter, item, position ->
-            //            val intent = Intent(this, MealActivity::class.java)
-//            startActivity(intent)
+
+            val module = MealInfosFragment()
+
+            getActivity()?.getSupportFragmentManager()?.beginTransaction()
+                ?.replace(R.id.fragmentContainer, module, "findThisFragment")
+                ?.addToBackStack("two")
+                ?.commit()
+
             true
         }
 
