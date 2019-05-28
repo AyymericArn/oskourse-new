@@ -1,5 +1,6 @@
 package com.hetic.oskourse
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -35,6 +36,12 @@ class HomeActivity : AppCompatActivity(), TextWatcher {
 
         val itemAdapter = ItemAdapter<IItem<*, *>>()
         val fastAdapter = FastAdapter.with<DishItem, ItemAdapter<IItem<*, *>>>(itemAdapter)
+
+        fastAdapter.withOnClickListener { view, adapter, item, position ->
+            val intent = Intent(this, MealActivity::class.java)
+            startActivity(intent)
+            true
+        }
 
         recyclerView.adapter = fastAdapter
 
