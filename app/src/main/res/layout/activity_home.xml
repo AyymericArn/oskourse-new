@@ -61,11 +61,6 @@
                 android:layout_width="403dp"
                 android:layout_height="match_parent" android:id="@+id/navBrowseView"
                 android:gravity="center|clip_vertical"/>
-        <TextView
-                android:text="My List"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" android:id="@+id/navListView"
-                android:gravity="center|end"/>
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
