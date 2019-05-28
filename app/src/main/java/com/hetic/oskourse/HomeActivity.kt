@@ -38,8 +38,8 @@ class HomeActivity : AppCompatActivity(), TextWatcher {
         val fastAdapter = FastAdapter.with<DishItem, ItemAdapter<IItem<*, *>>>(itemAdapter)
 
         fastAdapter.withOnClickListener { view, adapter, item, position ->
-            val intent = Intent(this, MealActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, MealActivity::class.java)
+//            startActivity(intent)
             true
         }
 

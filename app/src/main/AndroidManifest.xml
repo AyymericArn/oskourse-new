@@ -13,8 +13,6 @@
             android:theme="@style/AppTheme">
         <activity android:name=".HomeTestActivity">
         </activity>
-        <activity android:name=".MealActivity">
-        </activity>
         <activity
                 android:name=".HomeActivity"
                 android:windowSoftInputMode="adjustNothing">
