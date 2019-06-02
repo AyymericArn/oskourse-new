@@ -1,40 +1,42 @@
 package com.hetic.oskourse
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hetic.oskourse.fragments.MainFragment
-import com.hetic.oskourse.services.DishWrapper
-import com.hetic.oskourse.services.MealRepository
-import com.hetic.oskourse.viewholder.DishItem
-import com.mikepenz.fastadapter.FastAdapter
-import com.mikepenz.fastadapter.IItem
-import com.mikepenz.fastadapter.adapters.ItemAdapter
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_home.*
-import kotlinx.android.synthetic.main.row_dish.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.util.ArrayList
+import com.hetic.oskourse.fragments.MyListFragment
+import com.hetic.oskourse.fragments.MyMealsFragment
 
 class HomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home_test)
+        setContentView(R.layout.activity_navigation)
 
-        val module = MainFragment()
+        val navView: BottomNavigationView = findViewById(R.id.nav_view)
+        navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+
+        val mainFrag = MainFragment()
+        val mealFrag = MyMealsFragment()
+        val listFrag = MyListFragment()
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragmentContainer, module)
+            .add(R.id.fragmentContainer, mealFrag, "3")
+            .hide(mealFrag)
+            .commit()
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragmentContainer, listFrag, "2")
+            .hide(listFrag)
+            .commit()
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragmentContainer, mainFrag, "1")
             .addToBackStack("one")
             .commit()
+
 
 //        recyclerView.layoutManager = LinearLayoutManager(
 //            this,
@@ -133,6 +135,35 @@ class HomeActivity : AppCompatActivity() {
 //        searchButton.setOnClickListener {
 //            fetchAndDisplay()
 //        }
+    }
+
+    private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+
+        val mainFrag = MainFragment()
+        val mealFrag = MyMealsFragment()
+        val listFrag = MyListFragment()
+
+        var active: Fragment = mainFrag
+
+        when (item.itemId) {
+            R.id.navigation_meals -> {
+                supportFragmentManager.beginTransaction().hide(active).show(mealFrag)
+                active = mealFrag
+                Toast.makeText(this, active.toString(), Toast.LENGTH_SHORT).show()
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_main -> {
+                supportFragmentManager.beginTransaction().hide(active).show(mainFrag)
+                active = mainFrag
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_list -> {
+                supportFragmentManager.beginTransaction().hide(active).show(listFrag)
+                active = listFrag
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
     }
 
 //    override fun afterTextChanged(s: Editable?) {
