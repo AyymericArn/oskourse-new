@@ -11,6 +11,13 @@ import com.hetic.oskourse.fragments.MyMealsFragment
 
 class HomeActivity : AppCompatActivity() {
 
+    val mainFrag = MainFragment()
+    val mealFrag = MyMealsFragment()
+    val listFrag = MyListFragment()
+
+    var active: Fragment = mainFrag
+    val fm = supportFragmentManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
@@ -18,21 +25,17 @@ class HomeActivity : AppCompatActivity() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
-        val mainFrag = MainFragment()
-        val mealFrag = MyMealsFragment()
-        val listFrag = MyListFragment()
-
-        supportFragmentManager.beginTransaction()
+        fm.beginTransaction()
             .add(R.id.fragmentContainer, mealFrag, "3")
             .hide(mealFrag)
             .commit()
 
-        supportFragmentManager.beginTransaction()
+        fm.beginTransaction()
             .add(R.id.fragmentContainer, listFrag, "2")
             .hide(listFrag)
             .commit()
 
-        supportFragmentManager.beginTransaction()
+        fm.beginTransaction()
             .add(R.id.fragmentContainer, mainFrag, "1")
             .addToBackStack("one")
             .commit()
@@ -139,27 +142,21 @@ class HomeActivity : AppCompatActivity() {
 
     private val onNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
 
-        val mainFrag = MainFragment()
-        val mealFrag = MyMealsFragment()
-        val listFrag = MyListFragment()
-
-        var active: Fragment = mainFrag
-
         when (item.itemId) {
             R.id.navigation_meals -> {
-                supportFragmentManager.beginTransaction().hide(active).show(mealFrag)
-                active = mealFrag
-                Toast.makeText(this, active.toString(), Toast.LENGTH_SHORT).show()
+                fm.beginTransaction().hide(this.active).show(this.mealFrag).commit()
+                this.active = mealFrag
+                Toast.makeText(this, this.active.toString(), Toast.LENGTH_SHORT).show()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_main -> {
-                supportFragmentManager.beginTransaction().hide(active).show(mainFrag)
-                active = mainFrag
+                fm.beginTransaction().hide(this.active).show(this.mainFrag).commit()
+                this.active = mainFrag
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_list -> {
-                supportFragmentManager.beginTransaction().hide(active).show(listFrag)
-                active = listFrag
+                fm.beginTransaction().hide(this.active).show(this.listFrag).commit()
+                this.active = listFrag
                 return@OnNavigationItemSelectedListener true
             }
         }
