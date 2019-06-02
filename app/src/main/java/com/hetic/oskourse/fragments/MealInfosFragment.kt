@@ -43,7 +43,7 @@ class MealInfosFragment : Fragment() {
 
             val sharedPreference = PreferenceManager.getDefaultSharedPreferences(this.context)
 
-            // gets the old list of ingredients
+            // gets the old list of ingredients (local)
 
             var ingredientString = sharedPreference.getString("ingredients", "no ingredients")
 

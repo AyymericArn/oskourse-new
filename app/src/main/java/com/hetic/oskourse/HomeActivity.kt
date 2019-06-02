@@ -146,7 +146,7 @@ class HomeActivity : AppCompatActivity() {
             R.id.navigation_meals -> {
                 fm.beginTransaction().hide(this.active).show(this.mealFrag).commit()
                 this.active = mealFrag
-                Toast.makeText(this, this.active.toString(), Toast.LENGTH_SHORT).show()
+                // Toast.makeText(this, this.active.toString(), Toast.LENGTH_SHORT).show()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_main -> {
