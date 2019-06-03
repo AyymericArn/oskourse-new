@@ -5,6 +5,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 
+// dot not use
+
 class NavigationActivity : AppCompatActivity() {
 
     private lateinit var textMessage: TextView

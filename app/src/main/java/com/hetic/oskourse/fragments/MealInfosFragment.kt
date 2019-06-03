@@ -32,14 +32,13 @@ class MealInfosFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val id = arguments?.get("id").toString().toInt()
+        val id: Int = arguments?.get("id").toString().toInt()
 
         val repository = MealRepository()
 
         var ingredients = listOf<String>()
 
         addMealButton.setOnClickListener{
-            Toast.makeText(this.context, ingredients.toString(), Toast.LENGTH_LONG).show()
 
             val sharedPreference = PreferenceManager.getDefaultSharedPreferences(this.context)
 
@@ -51,14 +50,43 @@ class MealInfosFragment : Fragment() {
 
             val newIngredients = arrayListOf<String>()
 
-            newIngredients.addAll(ingredientList)
             newIngredients.addAll(ingredients)
-
-            sharedPreference.edit {
-                putString("ingredients", newIngredients.toString().replace("[", "").replace("]", ""))
+            ingredientList.forEach {
+                if (ingredients.contains(it.trim())) {
+                    Toast.makeText(context, "already have ingredient !", Toast.LENGTH_LONG).show()
+                } else {
+                    newIngredients.add(it)
+                }
             }
 
-            Toast.makeText(this.context, newIngredients.toString(), Toast.LENGTH_LONG).show()
+            // get the old list of registered meals
+
+            val mealsString = sharedPreference.getString("meals", "no meal saved")
+
+            var mealList = mealsString.split(",").toMutableList()
+
+//            if (!mealList.contains(id.toString().trim())) {
+//                Toast.makeText(context, id.toString(), Toast.LENGTH_LONG).show()
+//                mealList.add(id.toString().trim())
+//            }
+
+            // checks if meal is already in the list
+            var existingMeal: Boolean = false
+            mealList.forEach {
+                Toast.makeText(context, id.toString(), Toast.LENGTH_LONG).show()
+                if (it.trim() == id.toString().trim()) {
+                    existingMeal = true
+                    Toast.makeText(context, "condition passed !", Toast.LENGTH_LONG).show()
+                }
+            }
+            if (!existingMeal) {
+                mealList.add(id.toString().trim())
+            }
+
+            sharedPreference.edit {
+                putString("ingredients", newIngredients.toString().trim('[').trim(']').replace("\\s".toRegex(), ""))
+                putString("meals", mealList.toString().trim('[').trim(']').trim().replace("\\s".toRegex(), ""))
+            }
         }
 
         repository.api.getDishById(id)

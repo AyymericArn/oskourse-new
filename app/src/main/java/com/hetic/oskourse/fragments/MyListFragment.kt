@@ -52,7 +52,7 @@ class MyListFragment : Fragment() {
 
         fastAdapter.withOnClickListener { view, adapter, item, position ->
 
-            adapter.adapterItems.forEach {
+            // adapter.adapterItems.forEach {
                 // Toast.makeText(context, it.getViewHolder(view!!).toString(), Toast.LENGTH_LONG).show()
 
                 // CHANGE THE VIEW HERE
@@ -61,12 +61,12 @@ class MyListFragment : Fragment() {
                 // it.getViewHolder(!!).eyeButtonView.visibility = View.GONE
 
                 // it.getViewHolder(view!!).binButtonView.setOnClickListener(null)
-            }
+            // }
 
             // Toast.makeText(context, item.toString(), Toast.LENGTH_LONG).show()
 
-//            item.getViewHolder(view!!).binButtonView.visibility = View.VISIBLE
-//            item.getViewHolder(view!!).eyeButtonView.visibility = View.VISIBLE
+            item.getViewHolder(view!!).binButtonView.visibility = View.VISIBLE
+            item.getViewHolder(view!!).eyeButtonView.visibility = View.VISIBLE
 
             item.getViewHolder(view!!).binButtonView.setOnClickListener {
                 itemAdapter.remove(position)
@@ -87,10 +87,8 @@ class MyListFragment : Fragment() {
         var ingredientString = sharedPreference.getString("ingredients", "no ingredients")
         val ingredientsList = ingredientString.split(",")
 
-        Toast.makeText(context, ingredientsList.toString(), Toast.LENGTH_LONG).show()
-
         for (item in ingredientsList) {
-            val ingredient = IngredientItem(item.toString())
+            val ingredient = IngredientItem(item.toString(), context!!)
             itemAdapter.add(ingredient)
         }
     }

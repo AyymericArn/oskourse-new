@@ -37,7 +37,6 @@ class HomeActivity : AppCompatActivity() {
 
         fm.beginTransaction()
             .add(R.id.fragmentContainer, mainFrag, "1")
-            .addToBackStack("one")
             .commit()
 
 

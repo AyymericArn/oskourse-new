@@ -2,7 +2,9 @@ package com.hetic.oskourse.fragments
 
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.SharedMemory
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
@@ -10,9 +12,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.edit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hetic.oskourse.HomeActivity
+import android.preference.PreferenceManager
+import androidx.core.content.edit
 
 import com.hetic.oskourse.R
 import com.hetic.oskourse.services.DishWrapper
@@ -133,6 +138,11 @@ class MainFragment : Fragment(), TextWatcher {
 
         deleteButton.setOnClickListener {
             itemAdapter.removeRange(0, itemAdapter.adapterItemCount)
+            // debug only
+            val sharedPreference = PreferenceManager.getDefaultSharedPreferences(this.context)
+            sharedPreference.edit {
+                remove("meals")
+            }
         }
 
         searchButton.setOnClickListener {
