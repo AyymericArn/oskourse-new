@@ -59,6 +59,8 @@ class MainFragment : Fragment(), TextWatcher {
 
             val bundle = Bundle()
             bundle.putInt("id", item.dish.idMeal)
+            bundle.putBoolean("erase", false)
+            bundle.putInt("position", position)
 //            Toast.makeText(thisContext, "${item.dish.idMeal}", Toast.LENGTH_SHORT).show()
 
             val module = MealInfosFragment()

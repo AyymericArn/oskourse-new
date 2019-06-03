@@ -33,59 +33,91 @@ class MealInfosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val id: Int = arguments?.get("id").toString().toInt()
+        val erase: Boolean = arguments?.get("erase").toString().toBoolean()
+        val mealPosition: Int = arguments?.get("position").toString().toInt()
 
         val repository = MealRepository()
 
         var ingredients = listOf<String>()
 
-        addMealButton.setOnClickListener{
+        if (!erase) {
+            addMealButton.setOnClickListener{
 
-            val sharedPreference = PreferenceManager.getDefaultSharedPreferences(this.context)
+                val sharedPreference = PreferenceManager.getDefaultSharedPreferences(this.context)
 
-            // gets the old list of ingredients (local)
+                // gets the old list of ingredients (local)
 
-            var ingredientString = sharedPreference.getString("ingredients", "no ingredients")
+                var ingredientString = sharedPreference.getString("ingredients", "no ingredients")
 
-            val ingredientList = ingredientString.split(",")
+                val ingredientList = ingredientString.split(",")
 
-            val newIngredients = arrayListOf<String>()
+                val newIngredients = arrayListOf<String>()
 
-            newIngredients.addAll(ingredients)
-            ingredientList.forEach {
-                if (ingredients.contains(it.trim())) {
-                    Toast.makeText(context, "already have ingredient !", Toast.LENGTH_LONG).show()
-                } else {
-                    newIngredients.add(it)
+                newIngredients.addAll(ingredients)
+                ingredientList.forEach {
+                    if (!ingredients.contains(it.trim())) {
+                        newIngredients.add(it)
+                    }
                 }
-            }
 
-            // get the old list of registered meals
+                // get the old list of registered meals
 
-            val mealsString = sharedPreference.getString("meals", "no meal saved")
+                val mealsString = sharedPreference.getString("meals", "no meal saved")
 
-            var mealList = mealsString.split(",").toMutableList()
+                var mealList = mealsString.split(",").toMutableList()
 
 //            if (!mealList.contains(id.toString().trim())) {
 //                Toast.makeText(context, id.toString(), Toast.LENGTH_LONG).show()
 //                mealList.add(id.toString().trim())
 //            }
 
-            // checks if meal is already in the list
-            var existingMeal: Boolean = false
-            mealList.forEach {
-                Toast.makeText(context, id.toString(), Toast.LENGTH_LONG).show()
-                if (it.trim() == id.toString().trim()) {
-                    existingMeal = true
-                    Toast.makeText(context, "condition passed !", Toast.LENGTH_LONG).show()
+                // checks if meal is already in the list
+                var existingMeal: Boolean = false
+                mealList.forEach {
+                    if (it.trim() == id.toString().trim()) {
+                        existingMeal = true
+                    }
+                }
+                if (!existingMeal) {
+                    mealList.add(id.toString().trim())
+                }
+
+                sharedPreference.edit {
+                    putString("ingredients", newIngredients.toString().trim('[').trim(']').replace("\\s".toRegex(), ""))
+                    putString("meals", mealList.toString().trim('[').trim(']').trim().replace("\\s".toRegex(), ""))
                 }
             }
-            if (!existingMeal) {
-                mealList.add(id.toString().trim())
-            }
+        } else {
+            addMealButton.text = "Remove from my list"
 
-            sharedPreference.edit {
-                putString("ingredients", newIngredients.toString().trim('[').trim(']').replace("\\s".toRegex(), ""))
-                putString("meals", mealList.toString().trim('[').trim(']').trim().replace("\\s".toRegex(), ""))
+            addMealButton.setOnClickListener{
+
+                val sharedPreference = PreferenceManager.getDefaultSharedPreferences(this.context)
+
+                // gets the old list of ingredients (local)
+
+                var ingredientString = sharedPreference.getString("ingredients", "no ingredients")
+
+                val ingredientList = ingredientString.split(",").toMutableList()
+
+                ingredients.forEach {
+                    ingredientList.remove(it.replace("\\s".toRegex(), ""))
+                }
+
+                // get the old list of registered meals
+
+                val mealsString = sharedPreference.getString("meals", "no meal saved")
+
+                var mealList = mealsString.split(",").toMutableList()
+
+
+                // supress meal from my meals
+                mealList.removeAt(mealPosition)
+
+                sharedPreference.edit {
+                    putString("ingredients", ingredientList.toString().trim('[').trim(']').replace("\\s".toRegex(), ""))
+                    putString("meals", mealList.toString().trim('[').trim(']').trim().replace("\\s".toRegex(), ""))
+                }
             }
         }
 

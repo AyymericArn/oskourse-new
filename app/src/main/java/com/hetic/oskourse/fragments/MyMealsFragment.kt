@@ -51,6 +51,29 @@ class MyMealsFragment : Fragment() {
 
         recyclerView.adapter = fastAdapter
 
+        // handle clicks on meals
+
+        fastAdapter.withOnClickListener { view, adapter, item, position ->
+
+            val bundle = Bundle()
+            bundle.putInt("id", item.dish.idMeal)
+            bundle.putBoolean("erase", true)
+            bundle.putInt("position", position)
+//            Toast.makeText(thisContext, "${item.dish.idMeal}", Toast.LENGTH_SHORT).show()
+
+            val module = MealInfosFragment()
+            module.arguments = bundle
+
+            // replace fragment with the meal infos when an item in the link is clicked
+
+            getActivity()?.getSupportFragmentManager()?.beginTransaction()
+                ?.replace(R.id.fragmentContainer, module, "findThisFragment")
+                ?.addToBackStack("two")
+                ?.commit()
+
+            true
+        }
+
         // for api calls
 
         val repository = MealRepository()
@@ -81,7 +104,5 @@ class MyMealsFragment : Fragment() {
             }
 
         }
-
-        Toast.makeText(context, mealList.toString(), Toast.LENGTH_LONG).show()
     }
 }
