@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,23 +44,45 @@ class MyListFragment : Fragment() {
         val fastAdapter = FastAdapter.with<IngredientItem, ItemAdapter<IItem<*, *>>>(itemAdapter)
         recyclerView.adapter = fastAdapter
 
+        // enable shared preference access
+
+        val sharedPreference = PreferenceManager.getDefaultSharedPreferences(this.context)
+
         // enables actions on items when they are clicked
 
         fastAdapter.withOnClickListener { view, adapter, item, position ->
 
-            item.getViewHolder(view!!).binButtonView.visibility = View.VISIBLE
-            item.getViewHolder(view!!).eyeButtonView.visibility = View.VISIBLE
+            adapter.adapterItems.forEach {
+                // Toast.makeText(context, it.getViewHolder(view!!).toString(), Toast.LENGTH_LONG).show()
+
+                // CHANGE THE VIEW HERE
+
+                // it.getViewHolder(it.view!!).binButtonView.visibility = View.GONE
+                // it.getViewHolder(!!).eyeButtonView.visibility = View.GONE
+
+                // it.getViewHolder(view!!).binButtonView.setOnClickListener(null)
+            }
+
+            // Toast.makeText(context, item.toString(), Toast.LENGTH_LONG).show()
+
+//            item.getViewHolder(view!!).binButtonView.visibility = View.VISIBLE
+//            item.getViewHolder(view!!).eyeButtonView.visibility = View.VISIBLE
 
             item.getViewHolder(view!!).binButtonView.setOnClickListener {
                 itemAdapter.remove(position)
+
+                val ingredientsString = sharedPreference.getString("ingredients", "no ingredients")
+                val ingredientsList = ingredientsString.split(",").toMutableList()
+                ingredientsList.removeAt(position)
+                sharedPreference.edit {
+                    putString("ingredients", ingredientsList.toString().replace("[", "").replace("]", ""))
+                }
             }
 
             true
         }
 
         // gets the old list of ingredients (local)
-
-        val sharedPreference = PreferenceManager.getDefaultSharedPreferences(this.context)
 
         var ingredientString = sharedPreference.getString("ingredients", "no ingredients")
         val ingredientsList = ingredientString.split(",")

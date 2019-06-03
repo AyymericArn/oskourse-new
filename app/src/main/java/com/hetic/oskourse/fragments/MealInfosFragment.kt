@@ -55,7 +55,7 @@ class MealInfosFragment : Fragment() {
             newIngredients.addAll(ingredients)
 
             sharedPreference.edit {
-                putString("ingredients", newIngredients.toString())
+                putString("ingredients", newIngredients.toString().replace("[", "").replace("]", ""))
             }
 
             Toast.makeText(this.context, newIngredients.toString(), Toast.LENGTH_LONG).show()
