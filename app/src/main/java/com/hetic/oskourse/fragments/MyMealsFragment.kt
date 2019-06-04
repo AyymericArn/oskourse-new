@@ -67,7 +67,7 @@ class MyMealsFragment : Fragment() {
             // replace fragment with the meal infos when an item in the link is clicked
 
             getActivity()?.getSupportFragmentManager()?.beginTransaction()
-                ?.replace(R.id.fragmentContainer, module, "findThisFragment")
+                ?.replace(R.id.fragmentContainer, module, "mealFragment")
                 ?.addToBackStack("two")
                 ?.commit()
 

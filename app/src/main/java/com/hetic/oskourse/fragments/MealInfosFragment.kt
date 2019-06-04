@@ -86,6 +86,8 @@ class MealInfosFragment : Fragment() {
                     putString("ingredients", newIngredients.toString().trim('[').trim(']').replace("\\s".toRegex(), ""))
                     putString("meals", mealList.toString().trim('[').trim(']').trim().replace("\\s".toRegex(), ""))
                 }
+
+                activity?.onBackPressed()
             }
         } else {
             addMealButton.text = "Remove from my list"
@@ -118,6 +120,8 @@ class MealInfosFragment : Fragment() {
                     putString("ingredients", ingredientList.toString().trim('[').trim(']').replace("\\s".toRegex(), ""))
                     putString("meals", mealList.toString().trim('[').trim(']').trim().replace("\\s".toRegex(), ""))
                 }
+
+                activity?.onBackPressed()
             }
         }
 
