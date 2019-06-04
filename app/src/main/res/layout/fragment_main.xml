@@ -6,15 +6,15 @@
                                                    android:layout_height="match_parent"
                                                    tools:context=".fragments.MainFragment">
     <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="0dp"
-            android:layout_height="500dp"
+            android:layout_width="500dp"
+            android:layout_height="492dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent" android:id="@+id/recyclerView"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             android:layout_marginTop="20dp" app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.812"/>
+            app:layout_constraintVertical_bias="0.81"/>
     <EditText
             android:layout_width="259dp"
             android:layout_height="48dp"

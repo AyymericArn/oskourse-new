@@ -24,6 +24,7 @@ class HomeActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        navView.getMenu().findItem(R.id.navigation_main).setChecked(true)
 
         fm.beginTransaction()
             .add(R.id.fragmentContainer, mealFrag, "3")
