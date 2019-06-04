@@ -26,10 +26,6 @@ class IngredientViewHolder (itemView: View, val ctx: Context) : FastAdapter.View
 
     override fun bindView(item: IngredientItem, payloads: MutableList<Any>) {
         ingredientNameTextView.text = item.ingredient
-
-        // binButtonView.setOnClickListener {
-           // this.itemId.removeRange(adapterPosition)
-        // }
     }
 
     override fun unbindView(item: IngredientItem) {

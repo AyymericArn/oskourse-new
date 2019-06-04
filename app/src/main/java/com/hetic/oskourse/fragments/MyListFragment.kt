@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.edit
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,8 +21,10 @@ import com.hetic.oskourse.viewholder.IngredientItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.IItem
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import kotlinx.android.synthetic.main.dialog_ingredient.*
 import kotlinx.android.synthetic.main.fragment_my_list.*
 import kotlinx.android.synthetic.main.row_ingredient.*
+import kotlinx.android.synthetic.main.row_ingredient.view.*
 
 class MyListFragment : Fragment() {
 
@@ -34,6 +37,8 @@ class MyListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        getView()
 
         floatingActionButton.setOnClickListener { view ->
             val dialog = IngredientsDialog()
@@ -60,21 +65,17 @@ class MyListFragment : Fragment() {
 
         fastAdapter.withOnClickListener { view, adapter, item, position ->
 
-            // adapter.adapterItems.forEach {
-                // Toast.makeText(context, it.getViewHolder(view!!).toString(), Toast.LENGTH_LONG).show()
-
-                // CHANGE THE VIEW HERE
-
-                // it.getViewHolder(it.view!!).binButtonView.visibility = View.GONE
-                // it.getViewHolder(!!).eyeButtonView.visibility = View.GONE
-
-                // it.getViewHolder(view!!).binButtonView.setOnClickListener(null)
-            // }
-
-            // Toast.makeText(context, item.toString(), Toast.LENGTH_LONG).show()
+            val childCount = recyclerView.childCount
+            for (i in 0 until childCount) {
+                val child = recyclerView.getChildViewHolder(recyclerView.getChildAt(i))
+                child.itemView.binButton.visibility = View.GONE
+                child.itemView.binButton.setOnClickListener(null)
+                child.itemView.setBackgroundColor(resources.getColor(R.color.defaultWhite))
+            }
 
             item.getViewHolder(view!!).binButtonView.visibility = View.VISIBLE
-            item.getViewHolder(view!!).eyeButtonView.visibility = View.VISIBLE
+            // item.getViewHolder(view!!).eyeButtonView.visibility = View.VISIBLE
+            view.ingredientContainer.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark))
 
             item.getViewHolder(view!!).binButtonView.setOnClickListener {
                 itemAdapter.remove(position)

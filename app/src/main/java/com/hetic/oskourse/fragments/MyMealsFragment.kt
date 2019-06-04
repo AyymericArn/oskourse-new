@@ -78,12 +78,17 @@ class MyMealsFragment : Fragment() {
 
         val repository = MealRepository()
 
+        if (mealList[0] == "no meal saved" || mealList[0] == "nomealsaved") {
+            mealList = mealList.drop(1)
+        }
+        mealList = mealList.toMutableList()
+        while (mealList.contains("")) {
+            mealList.remove("")
+        }
         if (mealList.size > 0) {
-            if (mealList[0] == "no meal saved" || mealList[0] == "nomealsaved") {
-                mealList = mealList.drop(1)
-            }
+
             for (item in mealList) {
-                repository.api.getDishById(item.trim().toIntOrNull() ?: 52772)
+                repository.api.getDishById(item.trim().toInt())
                     .enqueue(object : Callback<DishWrapper> {
                         override fun onResponse(call: Call<DishWrapper>, response: Response<DishWrapper>) {
                             val mealWrapper = response.body()

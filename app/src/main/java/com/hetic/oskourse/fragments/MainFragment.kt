@@ -102,7 +102,6 @@ class MainFragment : Fragment(), TextWatcher {
                                 } else {
                                     itemAdapter.removeRange(0, itemAdapter.adapterItemCount)
                                 }
-//                        Toast.makeText(this@HomeActivity, "success", Toast.LENGTH_SHORT).show()
                             }
 
                             override fun onFailure(call: Call<DishWrapper>, t: Throwable) {
@@ -124,7 +123,6 @@ class MainFragment : Fragment(), TextWatcher {
                                     itemAdapter.add(item)
                                 }
                             }
-//                        Toast.makeText(this@HomeActivity, "success", Toast.LENGTH_SHORT).show()
                         }
 
                         override fun onFailure(call: Call<DishWrapper>, t: Throwable) {
@@ -163,6 +161,8 @@ class MainFragment : Fragment(), TextWatcher {
             fetchAndDisplay()
         }
 
+        fetchAndDisplay()
+
     }
 
     override fun afterTextChanged(s: Editable?) {
@@ -173,7 +173,5 @@ class MainFragment : Fragment(), TextWatcher {
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-
-//        Toast.makeText(this@HomeActivity, query, Toast.LENGTH_SHORT).show()
     }
 }
