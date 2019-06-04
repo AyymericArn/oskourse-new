@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "335770729224",
+    "firebase_url": "https://oskourses-v2.firebaseio.com",
+    "project_id": "oskourses-v2",
+    "storage_bucket": "oskourses-v2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:335770729224:android:b55b2a1961ce54a7",
+        "android_client_info": {
+          "package_name": "com.hetic.oskourse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "335770729224-f12p4pjen5362pg8qt8tlraqcablegsr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hetic.oskourse",
+            "certificate_hash": "8b99169d21f33df02cd3a1b5de8675f7f026f2de"
+          }
+        },
+        {
+          "client_id": "335770729224-v2m4gd202oiijn02hb8gtrdg9rh0ral7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAie1O3Ss3Y6MyRzx1AE3lOyAlFEY1ySbo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "335770729224-v2m4gd202oiijn02hb8gtrdg9rh0ral7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

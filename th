@@ -1,0 +1,47 @@
+[33mcommit 71bac6178d6e3c7be1693cf1bb27e1f30bea6648[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: AyymericArn <aymericarnoult@gmail.com>
+Date:   Tue May 28 21:53:52 2019 +0200
+
+    :sparkles: meal infos fragment displays good infos
+
+[33mcommit 228720fe5f8566ead06b90c9aa25da2954516077[m
+Author: AyymericArn <aymericarnoult@gmail.com>
+Date:   Tue May 28 21:07:05 2019 +0200
+
+    id passed from recyclerview to view
+
+[33mcommit 8ae2c6c525f964b0801b285c8ef9e1d9b5132d31[m
+Author: AyymericArn <aymericarnoult@gmail.com>
+Date:   Tue May 28 18:59:33 2019 +0200
+
+    link bewteen dish list item and mealinfos fragment done
+
+[33mcommit 91ccff0549f9dde1f0fd18eecbf142e1c57ea830[m
+Author: AyymericArn <aymericarnoult@gmail.com>
+Date:   Tue May 28 18:46:09 2019 +0200
+
+    fragmentation of home ok
+
+[33mcommit 90061786a6f70543753070d3759c0fdc35a6eb5f[m
+Author: AyymericArn <aymericarnoult@gmail.com>
+Date:   Tue May 28 17:06:50 2019 +0200
+
+    migration to android x sucessful
+
+[33mcommit 32f79e0bb4188a481781be4932f14623fdb3b940[m
+Author: AyymericArn <aymericarnoult@gmail.com>
+Date:   Tue May 28 16:08:42 2019 +0200
+
+    fixed androidx bugs
+
+[33mcommit 22301870bd663f21f5d2c03b426748d9d631dc75[m
+Author: AyymericArn <aymericarnoult@gmail.com>
+Date:   Tue May 28 15:51:52 2019 +0200
+
+    save before migrating to android x
+
+[33mcommit 0b793f5ec880f4726fbdb9ad08cb39da73b56924[m
+Author: AyymericArn <aymericarnoult@gmail.com>
+Date:   Tue May 28 12:33:12 2019 +0200
+
+    :tada: initial commit
