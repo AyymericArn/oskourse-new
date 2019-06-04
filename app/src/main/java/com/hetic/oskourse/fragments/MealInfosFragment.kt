@@ -120,7 +120,6 @@ class MealInfosFragment : Fragment() {
                     putString("ingredients", ingredientList.toString().trim('[').trim(']').replace("\\s".toRegex(), ""))
                     putString("meals", mealList.toString().trim('[').trim(']').trim().replace("\\s".toRegex(), ""))
                 }
-
                 activity?.onBackPressed()
             }
         }

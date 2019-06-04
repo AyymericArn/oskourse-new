@@ -52,6 +52,7 @@ class HomeActivity : AppCompatActivity() {
                 if (mealsFragment != null && mealsFragment.isVisible()) {
                     this.onBackPressed()
                 }
+
                 // Toast.makeText(this, this.active.toString(), Toast.LENGTH_SHORT).show()
                 return@OnNavigationItemSelectedListener true
             }
@@ -62,6 +63,7 @@ class HomeActivity : AppCompatActivity() {
                 if (mealsFragment != null && mealsFragment.isVisible()) {
                     this.onBackPressed()
                 }
+
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_list -> {
@@ -71,9 +73,11 @@ class HomeActivity : AppCompatActivity() {
                 if (mealsFragment != null && mealsFragment.isVisible()) {
                     this.onBackPressed()
                 }
+
                 return@OnNavigationItemSelectedListener true
             }
         }
         false
     }
+
 }

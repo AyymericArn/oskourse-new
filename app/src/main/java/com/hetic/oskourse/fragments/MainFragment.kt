@@ -118,6 +118,7 @@ class MainFragment : Fragment(), TextWatcher {
                             val dishWrapper = response.body()
                             if (dishWrapper!!.meals != null) {
                                 println(dishWrapper)
+
                                 for(myDish in dishWrapper.meals) {
                                     val item = DishItem(myDish)
                                     itemAdapter.add(item)
@@ -149,7 +150,6 @@ class MainFragment : Fragment(), TextWatcher {
                 fetchAndDisplay()
             }
         })
-
         deleteButton.setOnClickListener {
             itemAdapter.removeRange(0, itemAdapter.adapterItemCount)
             // debug only
