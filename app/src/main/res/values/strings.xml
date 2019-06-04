@@ -7,4 +7,18 @@
     <string name="title_home">My Meals</string>
     <string name="title_dashboard">Browse</string>
     <string name="title_notifications">My list</string>
+    <string name="confirm">Ok</string>
+    <string name="cancel">cancel</string>
+
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
+
 </resources>

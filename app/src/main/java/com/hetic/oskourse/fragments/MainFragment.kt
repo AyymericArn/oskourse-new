@@ -159,7 +159,7 @@ class MainFragment : Fragment(), TextWatcher {
             }
         }
 
-        searchButton.setOnClickListener {
+        optionsButton.setOnClickListener {
             fetchAndDisplay()
         }
 

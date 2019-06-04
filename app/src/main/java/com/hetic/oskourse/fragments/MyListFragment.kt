@@ -12,8 +12,10 @@ import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 
 import com.hetic.oskourse.R
+import com.hetic.oskourse.dialogs.IngredientsDialog
 import com.hetic.oskourse.viewholder.IngredientItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.IItem
@@ -32,6 +34,12 @@ class MyListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        floatingActionButton.setOnClickListener { view ->
+            val dialog = IngredientsDialog()
+            dialog.show(fragmentManager, "ingredientDialog")
+        }
+
         val layout = LinearLayoutManager(
             context,
             RecyclerView.VERTICAL,
