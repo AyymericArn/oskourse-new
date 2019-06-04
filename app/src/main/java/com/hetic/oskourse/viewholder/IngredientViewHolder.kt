@@ -1,5 +1,7 @@
 package com.hetic.oskourse.viewholder
 
+
+import android.content.Context
 import android.view.View
 import android.widget.ImageView
 // import android.content.ClipData
@@ -12,7 +14,8 @@ import android.preference.PreferenceManager
 import androidx.core.content.edit
 import com.hetic.oskourse.fragments.MyListFragment
 
-class IngredientViewHolder (itemView: View) : FastAdapter.ViewHolder<IngredientItem>(itemView) {
+
+class IngredientViewHolder (itemView: View, val ctx: Context) : FastAdapter.ViewHolder<IngredientItem>(itemView) {
     val ingredientNameTextView: TextView
     val eyeButtonView: ImageView
     val binButtonView: ImageView
@@ -26,18 +29,6 @@ class IngredientViewHolder (itemView: View) : FastAdapter.ViewHolder<IngredientI
     override fun bindView(item: IngredientItem, payloads: MutableList<Any>) {
         ingredientNameTextView.text = item.ingredient
 
-        binButtonView.setOnClickListener {
-
-            // val sharedPreference = PreferenceManager.getDefaultSharedPreferences()
-
-//            val ingredientsString = sharedPreference.getString("ingredients", "no ingredients")
-//            val ingredientsList = ingredientsString.split(",").toMutableList()
-//            ingredientsList.removeAt(position)
-//            sharedPreference.edit {
-//                putString("ingredients", ingredientsList.toString().replace("[", "").replace("]", ""))
-//            }
-        }
-
         // binButtonView.setOnClickListener {
            // this.itemId.removeRange(adapterPosition)
         // }
@@ -48,11 +39,12 @@ class IngredientViewHolder (itemView: View) : FastAdapter.ViewHolder<IngredientI
     }
 }
 
-class IngredientItem(val ingredient: String) : AbstractItem<IngredientItem, IngredientViewHolder>() {
+
+class IngredientItem(val ingredient: String, val ctx: Context) : AbstractItem<IngredientItem, IngredientViewHolder>() {
 
     override fun getType() = R.id.item_ingredient
 
-    override fun getViewHolder(v: View) = IngredientViewHolder(v)
+    override fun getViewHolder(v: View) = IngredientViewHolder(v, this.ctx)
 
     override fun getLayoutRes() = R.layout.row_ingredient
 

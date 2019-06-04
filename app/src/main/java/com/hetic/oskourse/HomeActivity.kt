@@ -16,6 +16,7 @@ import com.hetic.oskourse.fragments.MyListFragment
 import com.hetic.oskourse.fragments.MyMealsFragment
 import kotlinx.android.synthetic.main.toolbar.*
 
+
 class HomeActivity : AppCompatActivity() {
 
     val mainFrag = MainFragment()
@@ -31,6 +32,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
 
+
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
@@ -42,6 +44,7 @@ class HomeActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         navView.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
+        navView.getMenu().findItem(R.id.navigation_main).setChecked(true)
 
         fm.beginTransaction()
             .add(R.id.fragmentContainer, mealFrag, "3")
@@ -181,32 +184,41 @@ class HomeActivity : AppCompatActivity() {
             R.id.navigation_meals -> {
                 fm.beginTransaction().hide(this.active).show(this.mealFrag).commit()
                 this.active = mealFrag
+
+
+                val mealsFragment = fm.findFragmentByTag("mealFragment")
+                if (mealsFragment != null && mealsFragment.isVisible()) {
+                    this.onBackPressed()
+                }
+
                 // Toast.makeText(this, this.active.toString(), Toast.LENGTH_SHORT).show()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_main -> {
                 fm.beginTransaction().hide(this.active).show(this.mainFrag).commit()
                 this.active = mainFrag
+
+                val mealsFragment = fm.findFragmentByTag("mealFragment")
+                if (mealsFragment != null && mealsFragment.isVisible()) {
+                    this.onBackPressed()
+                }
+
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_list -> {
                 fm.beginTransaction().hide(this.active).show(this.listFrag).commit()
                 this.active = listFrag
+
+                val mealsFragment = fm.findFragmentByTag("mealFragment")
+                if (mealsFragment != null && mealsFragment.isVisible()) {
+                    this.onBackPressed()
+                }
+
                 return@OnNavigationItemSelectedListener true
             }
         }
         false
     }
 
-//    override fun afterTextChanged(s: Editable?) {
-//    }
-//
-//    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//    }
-//
-//    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//        val query = searchBar.text.toString()
-//
-////        Toast.makeText(this@HomeActivity, query, Toast.LENGTH_SHORT).show()
-//    }
+
 }

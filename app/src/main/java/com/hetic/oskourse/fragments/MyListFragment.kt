@@ -12,8 +12,10 @@ import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 
 import com.hetic.oskourse.R
+import com.hetic.oskourse.dialogs.IngredientsDialog
 import com.hetic.oskourse.viewholder.IngredientItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.IItem
@@ -32,6 +34,13 @@ class MyListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+
+        floatingActionButton.setOnClickListener { view ->
+            val dialog = IngredientsDialog()
+            dialog.show(fragmentManager, "ingredientDialog")
+        }
+
         val layout = LinearLayoutManager(
             context,
             RecyclerView.VERTICAL,
@@ -52,7 +61,9 @@ class MyListFragment : Fragment() {
 
         fastAdapter.withOnClickListener { view, adapter, item, position ->
 
-            adapter.adapterItems.forEach {
+
+            // adapter.adapterItems.forEach {
+
                 // Toast.makeText(context, it.getViewHolder(view!!).toString(), Toast.LENGTH_LONG).show()
 
                 // CHANGE THE VIEW HERE
@@ -61,12 +72,13 @@ class MyListFragment : Fragment() {
                 // it.getViewHolder(!!).eyeButtonView.visibility = View.GONE
 
                 // it.getViewHolder(view!!).binButtonView.setOnClickListener(null)
-            }
+
+            // }
 
             // Toast.makeText(context, item.toString(), Toast.LENGTH_LONG).show()
 
-//            item.getViewHolder(view!!).binButtonView.visibility = View.VISIBLE
-//            item.getViewHolder(view!!).eyeButtonView.visibility = View.VISIBLE
+            item.getViewHolder(view!!).binButtonView.visibility = View.VISIBLE
+            item.getViewHolder(view!!).eyeButtonView.visibility = View.VISIBLE
 
             item.getViewHolder(view!!).binButtonView.setOnClickListener {
                 itemAdapter.remove(position)
@@ -87,10 +99,9 @@ class MyListFragment : Fragment() {
         var ingredientString = sharedPreference.getString("ingredients", "no ingredients")
         val ingredientsList = ingredientString.split(",")
 
-        Toast.makeText(context, ingredientsList.toString(), Toast.LENGTH_LONG).show()
 
         for (item in ingredientsList) {
-            val ingredient = IngredientItem(item.toString())
+            val ingredient = IngredientItem(item.toString(), context!!)
             itemAdapter.add(ingredient)
         }
     }

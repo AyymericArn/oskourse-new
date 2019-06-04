@@ -2,7 +2,10 @@ package com.hetic.oskourse.fragments
 
 
 import android.content.Intent
+
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.SharedMemory
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
@@ -10,9 +13,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+
+import androidx.core.content.edit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hetic.oskourse.HomeActivity
+import android.preference.PreferenceManager
+import androidx.core.content.edit
 
 import com.hetic.oskourse.R
 import com.hetic.oskourse.services.DishWrapper
@@ -54,6 +61,9 @@ class MainFragment : Fragment(), TextWatcher {
 
             val bundle = Bundle()
             bundle.putInt("id", item.dish.idMeal)
+
+            bundle.putBoolean("erase", false)
+            bundle.putInt("position", position)
 //            Toast.makeText(thisContext, "${item.dish.idMeal}", Toast.LENGTH_SHORT).show()
 
             val module = MealInfosFragment()
@@ -62,7 +72,8 @@ class MainFragment : Fragment(), TextWatcher {
             // replace fragment with the meal infos when an item in the link is clicked
 
             getActivity()?.getSupportFragmentManager()?.beginTransaction()
-                ?.replace(R.id.fragmentContainer, module, "findThisFragment")
+
+                ?.replace(R.id.fragmentContainer, module, "mealFragment")
                 ?.addToBackStack("two")
                 ?.commit()
 
@@ -73,7 +84,6 @@ class MainFragment : Fragment(), TextWatcher {
 
         val repository = MealRepository()
 
-        searchBar.addTextChangedListener(this)
 
         // query to the API
 
@@ -82,7 +92,7 @@ class MainFragment : Fragment(), TextWatcher {
             val search = searchBar.text.toString()
 
             if (search.isBlank()) {
-                Toast.makeText(thisContext, "is blank", Toast.LENGTH_SHORT).show()
+
                 for (i in 0..20) {
                     repository.api.getRandomDish()
                         .enqueue(object : Callback<DishWrapper> {
@@ -112,7 +122,9 @@ class MainFragment : Fragment(), TextWatcher {
                     .enqueue(object : Callback<DishWrapper> {
                         override fun onResponse(call: Call<DishWrapper>, response: Response<DishWrapper>) {
                             val dishWrapper = response.body()
-                            if (dishWrapper != null) {
+
+                            if (dishWrapper!!.meals != null) {
+                                println(dishWrapper)
 
                                 for(myDish in dishWrapper.meals) {
                                     val item = DishItem(myDish)
@@ -131,11 +143,31 @@ class MainFragment : Fragment(), TextWatcher {
 
         }
 
+
+        searchBar.addTextChangedListener(object: TextWatcher{
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                itemAdapter.removeRange(0, itemAdapter.adapterItemCount)
+                fetchAndDisplay()
+            }
+        })
         deleteButton.setOnClickListener {
             itemAdapter.removeRange(0, itemAdapter.adapterItemCount)
+            // debug only
+            val sharedPreference = PreferenceManager.getDefaultSharedPreferences(this.context)
+            sharedPreference.edit {
+                remove("meals")
+            }
         }
 
-        searchButton.setOnClickListener {
+        optionsButton.setOnClickListener {
             fetchAndDisplay()
         }
 
@@ -148,7 +180,8 @@ class MainFragment : Fragment(), TextWatcher {
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        val query = searchBar.text.toString()
+
+
 
 //        Toast.makeText(this@HomeActivity, query, Toast.LENGTH_SHORT).show()
     }

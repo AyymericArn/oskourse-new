@@ -24,26 +24,29 @@
             android:text="Search"
             android:ems="10"
             android:id="@+id/searchBar" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintEnd_toStartOf="@+id/searchButton"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
     <Button
             android:text="Go"
             android:layout_width="68dp"
             android:layout_height="47dp"
-            android:id="@+id/searchButton" app:layout_constraintStart_toEndOf="@+id/searchBar"
-            app:layout_constraintHorizontal_bias="0.5" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="64dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginEnd="8dp"/>
+
+            android:id="@+id/optionsButton" app:layout_constraintStart_toEndOf="@+id/searchBar"
+
+            app:layout_constraintHorizontal_bias="1.0" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/deleteButton"
+            app:layout_constraintVertical_bias="0.863"/>
     <Button
             android:text="del"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/deleteButton" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/searchButton" android:layout_marginBottom="8dp"
+            android:id="@+id/deleteButton"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/recyclerView" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="0.863" android:layout_marginEnd="8dp"/>
+            android:layout_marginEnd="8dp"/>
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="0dp"
             android:layout_height="30dp" app:layout_constraintEnd_toEndOf="parent"
