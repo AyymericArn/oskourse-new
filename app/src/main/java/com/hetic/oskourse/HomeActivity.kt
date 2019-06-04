@@ -11,6 +11,9 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.hetic.oskourse.fragments.MainFragment
 import com.hetic.oskourse.fragments.MyListFragment
 import com.hetic.oskourse.fragments.MyMealsFragment
@@ -27,6 +30,7 @@ class HomeActivity : AppCompatActivity() {
     val fm = supportFragmentManager
 
     var firebaseAuth: FirebaseAuth? = null
+    private lateinit var database: FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +43,14 @@ class HomeActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         val user = firebaseAuth?.getCurrentUser()
+
+        database = FirebaseDatabase.getInstance()
+        val dbReference: DatabaseReference = database.getReference("message")
+
+
+        if (user != null) {
+            dbReference.setValue("test")
+        }
 
         toolbarName.setText(user?.displayName)
 

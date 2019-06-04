@@ -14,11 +14,12 @@
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp">
         <ScrollView
-                android:layout_width="403dp"
-                android:layout_height="557dp">
+                android:layout_width="match_parent"
+                android:layout_height="557dp"
+        android:layout_margin="0dp">
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content" android:background="#FFE967">
 
                 <ImageView
                         android:src="@drawable/placeholder"
@@ -76,7 +77,8 @@
                         app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@+id/mealDescriptionTextView"/>
+                        app:layout_constraintTop_toBottomOf="@+id/mealDescriptionTextView"
+                        android:background="#FFE967"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>

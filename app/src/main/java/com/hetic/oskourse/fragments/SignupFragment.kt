@@ -12,12 +12,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.hetic.oskourse.R
 import kotlinx.android.synthetic.main.fragment_signup.*
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.hetic.oskourse.HomeActivity
 
 
 class SignupFragment : Fragment() {
 
     var firebaseAuth: FirebaseAuth? = null
+    var database: FirebaseDatabase? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +34,7 @@ class SignupFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         firebaseAuth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
 
         signupValidation.setOnClickListener{
             signUp()
@@ -82,6 +86,16 @@ class SignupFragment : Fragment() {
                         .build()
 
                     user?.updateProfile(profileUpdates)
+
+                    Toast.makeText(
+                        context, "${user?.uid}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    val ref = database?.getReference("${user?.uid}/owner")
+
+                    ref?.setValue(user?.displayName)
+
 
                     val intent = Intent(context, HomeActivity::class.java)
                     startActivity(intent)

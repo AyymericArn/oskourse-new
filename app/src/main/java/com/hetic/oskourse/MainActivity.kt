@@ -41,10 +41,10 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = firebaseAuth?.currentUser
-        /*if (currentUser != null){
+        if (currentUser != null){
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
-        }*/
+        }
 
 
     }
