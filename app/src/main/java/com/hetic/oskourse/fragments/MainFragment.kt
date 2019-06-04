@@ -80,8 +80,6 @@ class MainFragment : Fragment(), TextWatcher {
 
         val repository = MealRepository()
 
-        searchBar.addTextChangedListener(this)
-
         // query to the API
 
         fun fetchAndDisplay() {
@@ -89,7 +87,6 @@ class MainFragment : Fragment(), TextWatcher {
             val search = searchBar.text.toString()
 
             if (search.isBlank()) {
-                Toast.makeText(thisContext, "is blank", Toast.LENGTH_SHORT).show()
                 for (i in 0..20) {
                     repository.api.getRandomDish()
                         .enqueue(object : Callback<DishWrapper> {
@@ -119,8 +116,8 @@ class MainFragment : Fragment(), TextWatcher {
                     .enqueue(object : Callback<DishWrapper> {
                         override fun onResponse(call: Call<DishWrapper>, response: Response<DishWrapper>) {
                             val dishWrapper = response.body()
-                            if (dishWrapper != null) {
-
+                            if (dishWrapper!!.meals != null) {
+                                println(dishWrapper)
                                 for(myDish in dishWrapper.meals) {
                                     val item = DishItem(myDish)
                                     itemAdapter.add(item)
@@ -137,6 +134,21 @@ class MainFragment : Fragment(), TextWatcher {
             }
 
         }
+
+        searchBar.addTextChangedListener(object: TextWatcher{
+
+            override fun afterTextChanged(s: Editable) {}
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                itemAdapter.removeRange(0, itemAdapter.adapterItemCount)
+                fetchAndDisplay()
+            }
+        })
 
         deleteButton.setOnClickListener {
             itemAdapter.removeRange(0, itemAdapter.adapterItemCount)
@@ -160,7 +172,7 @@ class MainFragment : Fragment(), TextWatcher {
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        val query = searchBar.text.toString()
+
 
 //        Toast.makeText(this@HomeActivity, query, Toast.LENGTH_SHORT).show()
     }
