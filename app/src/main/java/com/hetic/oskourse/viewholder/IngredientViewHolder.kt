@@ -1,5 +1,6 @@
 package com.hetic.oskourse.viewholder
 
+
 import android.content.Context
 import android.view.View
 import android.widget.ImageView
@@ -12,6 +13,7 @@ import com.mikepenz.fastadapter.items.AbstractItem
 import android.preference.PreferenceManager
 import androidx.core.content.edit
 import com.hetic.oskourse.fragments.MyListFragment
+
 
 class IngredientViewHolder (itemView: View, val ctx: Context) : FastAdapter.ViewHolder<IngredientItem>(itemView) {
     val ingredientNameTextView: TextView
@@ -32,6 +34,7 @@ class IngredientViewHolder (itemView: View, val ctx: Context) : FastAdapter.View
         ingredientNameTextView.text = ""
     }
 }
+
 
 class IngredientItem(val ingredient: String, val ctx: Context) : AbstractItem<IngredientItem, IngredientViewHolder>() {
 

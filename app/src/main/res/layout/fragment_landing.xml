@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_height="match_parent" android:layout_width="match_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                       xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                       xmlns:tools="http://schemas.android.com/tools"
+                                                       android:layout_width="match_parent"
+                                                       android:layout_height="667dp"
+                                                       tools:context=".fragments.LandingFragment"
+                                                       android:id="@+id/frameLayout">
+
+
+        <Button
+                android:text="S'inscrire"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/signupButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" android:layout_marginTop="68dp"
+                app:layout_constraintTop_toBottomOf="@+id/signinButton" android:background="#A0ED7C"/>
+        <Button
+                android:text="Entrer sans se connecter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" android:id="@+id/homeButton"
+                app:layout_constraintTop_toBottomOf="@+id/signupButton"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="8dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintHorizontal_bias="0.498" app:layout_constraintVertical_bias="0.217"
+                android:textColor="#000000" android:background="#FFE967" android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/signinPassword" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                android:hint="Mot de passe" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/signinEmail"/>
+        <Button
+                android:text="Se connecter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/signinButton" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/signinPassword" app:layout_constraintHorizontal_bias="0.498"
+                android:background="#FFC65C" android:paddingLeft="10dp" android:paddingRight="10dp"/>
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:ems="10"
+                android:id="@+id/signinEmail" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp"
+                android:hint="Adresse E-mail" android:layout_marginTop="32dp"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
+        <ImageView
+                android:src="@drawable/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView2" android:layout_marginTop="40dp"
+                app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintHorizontal_bias="0.497"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

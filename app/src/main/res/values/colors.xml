@@ -4,4 +4,11 @@
     <color name="colorPrimaryDark">#FFC65C</color>
     <color name="colorAccent">#A0ED7C</color>
     <color name="defaultWhite">#FFFFFF</color>
+    <color name="defaultGrey">#9B9B9B</color>
+    <color name="changeableWhite">
+        <selector xmlns:android="http://schemas.android.com/apk/res/android">
+            <item android:state_checked="true" android:color="@color/defaultWhite" />
+            <item android:color="@color/defaultGrey"  />
+        </selector>
+    </color>
 </resources>

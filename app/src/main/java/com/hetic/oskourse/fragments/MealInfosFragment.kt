@@ -32,6 +32,7 @@ class MealInfosFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         val id: Int = arguments?.get("id").toString().toInt()
         val erase: Boolean = arguments?.get("erase").toString().toBoolean()
         val mealPosition: Int = arguments?.get("position").toString().toInt()
@@ -39,6 +40,7 @@ class MealInfosFragment : Fragment() {
         val repository = MealRepository()
 
         var ingredients = listOf<String>()
+
 
         if (!erase) {
             addMealButton.setOnClickListener{

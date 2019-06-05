@@ -2,6 +2,7 @@ package com.hetic.oskourse.fragments
 
 
 import android.content.Intent
+
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.SharedMemory
@@ -12,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+
 import androidx.core.content.edit
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +28,8 @@ import com.hetic.oskourse.viewholder.DishItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.IItem
 import com.mikepenz.fastadapter.adapters.ItemAdapter
-import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_navigation.*
+import kotlinx.android.synthetic.main.fragment_main.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,6 +62,7 @@ class MainFragment : Fragment(), TextWatcher {
 
             val bundle = Bundle()
             bundle.putInt("id", item.dish.idMeal)
+
             bundle.putBoolean("erase", false)
             bundle.putInt("position", position)
 //            Toast.makeText(thisContext, "${item.dish.idMeal}", Toast.LENGTH_SHORT).show()
@@ -69,6 +73,7 @@ class MainFragment : Fragment(), TextWatcher {
             // replace fragment with the meal infos when an item in the link is clicked
 
             getActivity()?.getSupportFragmentManager()?.beginTransaction()
+
                 ?.replace(R.id.fragmentContainer, module, "mealFragment")
                 ?.addToBackStack("two")
                 ?.commit()
@@ -80,6 +85,7 @@ class MainFragment : Fragment(), TextWatcher {
 
         val repository = MealRepository()
 
+
         // query to the API
 
         fun fetchAndDisplay() {
@@ -87,6 +93,7 @@ class MainFragment : Fragment(), TextWatcher {
             val search = searchBar.text.toString()
 
             if (search.isBlank()) {
+
                 for (i in 0..20) {
                     repository.api.getRandomDish()
                         .enqueue(object : Callback<DishWrapper> {
@@ -115,6 +122,7 @@ class MainFragment : Fragment(), TextWatcher {
                     .enqueue(object : Callback<DishWrapper> {
                         override fun onResponse(call: Call<DishWrapper>, response: Response<DishWrapper>) {
                             val dishWrapper = response.body()
+
                             if (dishWrapper!!.meals != null) {
                                 println(dishWrapper)
 
@@ -133,6 +141,7 @@ class MainFragment : Fragment(), TextWatcher {
             }
 
         }
+
 
         searchBar.addTextChangedListener(object: TextWatcher{
 

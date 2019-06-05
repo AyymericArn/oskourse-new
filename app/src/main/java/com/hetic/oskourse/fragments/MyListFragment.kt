@@ -96,6 +96,7 @@ class MyListFragment : Fragment() {
         var ingredientString = sharedPreference.getString("ingredients", "no ingredients")
         val ingredientsList = ingredientString.split(",")
 
+
         for (item in ingredientsList) {
             val ingredient = IngredientItem(item.toString(), context!!)
             itemAdapter.add(ingredient)

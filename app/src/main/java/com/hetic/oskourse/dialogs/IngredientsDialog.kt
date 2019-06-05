@@ -13,15 +13,10 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.edit
-import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.dialog_ingredient.*
 import java.util.*
 import kotlin.concurrent.schedule
 import android.widget.EditText
-
-
-
-
 
 class IngredientsDialog : DialogFragment() {
 

@@ -2,6 +2,7 @@ package com.hetic.oskourse.fragments
 
 
 import android.os.Bundle
+
 import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +19,8 @@ import com.hetic.oskourse.viewholder.DishItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.IItem
 import com.mikepenz.fastadapter.adapters.ItemAdapter
-import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_navigation.*
+import kotlinx.android.synthetic.main.fragment_my_meals.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,7 +80,7 @@ class MyMealsFragment : Fragment() {
 
         val repository = MealRepository()
 
-        if (mealList[0] == "no meal saved" || mealList[0] == "nomealsaved") {
+        if (mealList[0] == "no meal saved" || mealList[0] == "nomealsaved" || mealList[0] == "no meals saved" || mealList[0] == "nomealssaved") {
             mealList = mealList.drop(1)
         }
         mealList = mealList.toMutableList()
